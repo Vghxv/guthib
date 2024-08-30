@@ -15,19 +15,18 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
+      - name: check working directory
+        run: ls -la
+
       - name: Install system dependencies
         run: |
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
-
-      - name: Debug renv cache contents before restore
-        run: |
-          ls -la renv/library
       
       - name: Cache R packages
         uses: actions/cache@v3
         with:
           path: |
-            ./renv/library
+            ./work/guthib/guthib/renv/library
           key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
@@ -40,7 +39,8 @@ jobs:
 
       - name: Debug renv cache contents after restore
         run: |
-          ls -la renv/library
+          ls -la work/guthib/guthib/renv/library
+          
       - name: Run tests
         working-directory: ${{ github.workspace }}
         run: |
