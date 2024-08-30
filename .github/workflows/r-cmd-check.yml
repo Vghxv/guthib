@@ -1,8 +1,6 @@
 name: R-CMD-check
 
 on:
-  push:
-    branches: [master]
   pull_request:
     branches: [master]
 
@@ -20,20 +18,29 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+      - name: Debug renv cache contents before restore
+        run: |
+          ls -la renv/library
+      
       - name: Cache R packages
         uses: actions/cache@v3
         with:
           path: |
-            renv/library
-            ~/R/Library
+            ./renv/library
           key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
+      
       - name: Set up R dependencies with renv
         run: |
           Rscript -e 'install.packages("renv", repos = "https://cloud.r-project.org")'
           Rscript -e 'renv::restore()'
 
+
+      - name: Debug renv cache contents after restore
+        run: |
+          ls -la renv/library
       - name: Run tests
         working-directory: ${{ github.workspace }}
         run: |
