@@ -24,11 +24,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ~/.local/share/renv
+            renv/library
             ~/R/Library
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
           restore-keys: |
-              ${{ runner.os }}-renv-
+            ${{ runner.os }}-renv-
       - name: Set up R dependencies with renv
         run: |
           Rscript -e 'install.packages("renv", repos = "https://cloud.r-project.org")'
