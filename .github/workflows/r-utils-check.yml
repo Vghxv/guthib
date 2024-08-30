@@ -10,8 +10,6 @@ on:
 
 jobs:
   test:
-    env:
-      RENV_PATHS_ROOT: ~/.cache/R/renv
     runs-on: ubuntu-latest
 
     steps:
