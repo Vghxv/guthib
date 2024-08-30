@@ -23,7 +23,7 @@ jobs:
 
       - name: Set up R dependencies with renv
         run: |
-          Rscript -e 'install.packages("renv", repos = "http://cran.us.r-project.org")'
+          Rscript -e 'install.packages("renv", repos = "https://cloud.r-project.org")'
           Rscript -e 'renv::restore()'
 
       - name: Run tests

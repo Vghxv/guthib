@@ -1,4 +1,4 @@
-source("R-scripts/utils.R")
+source(file.path(getwd(), "R-scripts", "utils.R"))
 
 
 library(testthat)
