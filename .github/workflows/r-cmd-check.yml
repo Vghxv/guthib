@@ -21,14 +21,10 @@ jobs:
         run: |
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
 
-      - name: Set up R dependencies
+      - name: Set up R dependencies with renv
         run: |
-          install.packages('devtools')
-          install.packages('testthat')
-
-      - name: Install package dependencies
-        run: |
-          Rscript -e 'devtools::install_deps(dependencies = TRUE)'
+          Rscript -e 'install.packages("renv", repos = "https://cran.csie.ntu.edu.tw/")'
+          Rscript -e 'renv::restore()'
 
       - name: Run R script
         run: |
