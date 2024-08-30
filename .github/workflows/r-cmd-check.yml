@@ -23,13 +23,9 @@ jobs:
 
       - name: Set up R dependencies with renv
         run: |
-          Rscript -e 'install.packages("renv", repos = "https://cran.csie.ntu.edu.tw/")'
+          Rscript -e 'install.packages("renv", repos = "http://cran.us.r-project.org")'
           Rscript -e 'renv::restore()'
-
-      - name: Run R script
-        run: |
-          Rscript R-scripts/utils.R
 
       - name: Run tests
         run: |
-          Rscript -e 'testthat::test_dir("tests")'
+          Rscript -e 'testthat::test_dir("R-scripts/tests")'
