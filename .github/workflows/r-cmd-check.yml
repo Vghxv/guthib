@@ -37,4 +37,4 @@ jobs:
       - name: Run tests
         working-directory: ${{ github.workspace }}
         run: |
-          Rscript -e 'testthat::test_dir("R-scripts/tests")'
+          Rscript -e 'testthat::test_dir("R-scripts")'
