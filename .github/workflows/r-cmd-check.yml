@@ -18,12 +18,14 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
-      
+      - name: Set up renv library path environment variable
+        id: renv-path
+        run: |
+          echo "LIB_PATH=$(Rscript -e 'cat(.libPaths()[1])')" >> $GITHUB_ENV
       - name: Cache R packages
         uses: actions/cache@v3
         with:
-          path: |
-            ~/work/guthib/guthib/renv/library
+          path: ${{ env.LIB_PATH }}
           key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
@@ -36,9 +38,7 @@ jobs:
 
       - name: Debug renv cache contents after restore
         run: |
-          ls -la
-          ls -la ~/work/guthib/guthib/renv/library
-
+          ls -la ${{ env.LIB_PATH }}
       - name: Run tests
         working-directory: ${{ github.workspace }}
         run: |
