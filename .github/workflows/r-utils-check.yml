@@ -2,7 +2,11 @@ name: r-utils-check
 
 on:
   pull_request:
-    branches: [master]
+    paths:
+      - R-scripts/**
+      - renv/**
+      - .github/workflows/r-utils-check.yml
+      - renv.lock
 
 jobs:
   test:
