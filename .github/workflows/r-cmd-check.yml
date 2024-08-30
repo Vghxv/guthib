@@ -23,7 +23,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ~work/guthib/guthib/renv/library
+            ~/work/guthib/guthib/renv/library
           key: ${{ runner.os }}-renv-${{ hashFiles('renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
@@ -37,7 +37,7 @@ jobs:
       - name: Debug renv cache contents after restore
         run: |
           ls -la
-          ls -la ~work/guthib/guthib/renv/library
+          ls -la ~/work/guthib/guthib/renv/library
 
       - name: Run tests
         working-directory: ${{ github.workspace }}
