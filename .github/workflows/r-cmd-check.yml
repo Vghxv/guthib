@@ -18,8 +18,6 @@ jobs:
             .github
             R-scripts
             renv
-            .Rprofile
-            renv.lock
 
       - name: check current directory
         run: ls -la
